@@ -324,8 +324,8 @@ public class Programa3
     public static void main(String[] args) {
         MatrizCompleja M1;
         M1 = new MatrizCompleja(3, 3);
-        MatrizCompleja M2;
-        M2 = new MatrizCompleja(3, 3);
+        // MatrizCompleja M2;
+        // M2 = new MatrizCompleja(3, 3);
         NumeroComplejo Res;
         Res = new NumeroComplejo();
         M1.ShowMatrizCompleja();
