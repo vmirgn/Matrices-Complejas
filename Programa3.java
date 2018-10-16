@@ -339,7 +339,7 @@ public class Programa3
         Res = M1.DeterminanteMatrizCompleja();
         System.out.println(" ");
         Res.Show();
-        System.out.println(" ");
+        // System.out.println(" ");
         // M2.ShowMatrizCompleja();
         // System.out.println(" ");
         // M1.TrasnspuestaMatriz();
