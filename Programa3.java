@@ -258,63 +258,36 @@ class MatrizCompleja {
         }
     }
 
-    NumeroComplejo DeterminanteMatrizCompleja()
+    void AbsolutoMatrizCompleja()
     {
-        NumeroComplejo NumCompl, NumComplF;
-        NumCompl = new NumeroComplejo();
-        NumComplF = new NumeroComplejo();
-        if ((N != 3)||(M != 3)) {
-            System.out.println("La matríz debe ser de 3x3");
-        }
-        else{
-            int i, j, k;
-            NumeroComplejo Aux[][];
-            Aux = new NumeroComplejo[M + 2][N];
-            for (i = 0; i < M + 2; i++) {
-                for(j = 0; j < N; j++){
-                    Aux[i][j] = new NumeroComplejo();
-                }
-            }
-
-            for (i = 0; i < M; i++) {
-                for (j = 0; j < N; j++) {
-                    Aux[i][j] = Mat[i][j];
-                    if (i < 2) {
-                        Aux[i + 3][j] = Mat[i][j];
-                        System.out.println("[" + (i + 3) + "][" + j + "] -> Elemento[" + i + "][" + j + "]");
-                    }
-                }
-            }
-
-            for (k = 0; k < M; k++) {
-                NumCompl.Set(1, 1);
-                for (i = k, j = 0; j < N; j++, i++) {
-                    NumCompl.Multiplica(Aux[i][j]);
-                    System.out.println("Elemento[" + i + "][" + j + "]");
-                    Aux[i][j].Show();
-                    System.out.println("\n");
-                }
-                System.out.println("\n");
-                NumComplF.Suma(NumCompl);
-                NumCompl = null;
-                NumCompl = new NumeroComplejo();
-            }
-
-            for (k = 0; k < M; k++) {
-                NumCompl.Set(1, 1);
-                for (i = k, j = N - 1; j > -1; j--, i++) {
-                    NumCompl.Multiplica(Aux[i][j]);
-                    System.out.println("--> Elemento[" + i + "][" + j + "]:");
-                    Aux[i][j].Show();
-                    System.out.println("\n");
-                }
-                System.out.println("\n");
-                NumComplF.Resta(NumCompl);
-                NumCompl = null;
-                NumCompl = new NumeroComplejo();
+        int i, j;
+        NumeroComplejo Aux[][];
+        Aux = new NumeroComplejo[M][N];
+        for (i = 0; i < M; i++) {
+            for(j = 0; j < N; j++){
+                Aux[i][j] = new NumeroComplejo();
             }
         }
-        return NumComplF;
+        
+        for (i = 0; i < M; i++) {
+            for(j = 0; j < N; j++){
+                Aux[i][j].Set(Math.sqrt(Math.pow(Mat[i][j].GetIm(), 2) + Math.pow(Mat[i][j].GetRe(), 2)), 0);
+            }
+        }
+
+        Mat = null;
+        Mat = new NumeroComplejo[M][N];
+        for (i = 0; i < M; i++) {
+            for(j = 0; j < N; j++){
+                Mat[i][j] = new NumeroComplejo();
+            }
+        }
+
+        for (i = 0; i < M; i++) {
+            for(j = 0; j < N; j++){
+                Mat[i][j] = Aux[i][j];
+            }
+        }
     }
 
 }
@@ -326,8 +299,6 @@ public class Programa3
         M1 = new MatrizCompleja(3, 3);
         // MatrizCompleja M2;
         // M2 = new MatrizCompleja(3, 3);
-        NumeroComplejo Res;
-        Res = new NumeroComplejo();
         M1.ShowMatrizCompleja();
         System.out.println(" ");
         M1.InicializarMatriz();
@@ -336,9 +307,9 @@ public class Programa3
         // System.out.println(" ");
         M1.ShowMatrizCompleja();
         System.out.println(" ");
-        Res = M1.DeterminanteMatrizCompleja();
+        M1.AbsolutoMatrizCompleja();
         System.out.println(" ");
-        Res.Show();
+        M1.ShowMatrizCompleja();
         // System.out.println(" ");
         // M2.ShowMatrizCompleja();
         // System.out.println(" ");
